@@ -1,0 +1,6 @@
+framework module Pods_fiebaseDiccionary {
+  umbrella header "Pods-fiebaseDiccionary-umbrella.h"
+
+  export *
+  module * { export * }
+}
