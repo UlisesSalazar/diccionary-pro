@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fn8-wy-arU">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fn8-wy-arU">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,17 +11,25 @@
         <!--View Controller-->
         <scene sceneID="OYW-3w-2Zi">
             <objects>
-                <viewController id="fn8-wy-arU" sceneMemberID="viewController">
+                <viewController id="fn8-wy-arU" customClass="ViewController" customModule="fiebaseDiccionary" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KSz-Rl-BWr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="RG7-sb-Vfc">
+                                <rect key="frame" x="20" y="44" width="374" height="56"/>
+                                <color key="barTintColor" red="0.5941045880317688" green="0.72655302286148071" blue="0.91640114784240723" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="fn8-wy-arU" id="bYr-Cr-SBo"/>
+                                </connections>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4cs-cA-rZB">
-                                <rect key="frame" x="0.0" y="156" width="414" height="759"/>
+                                <rect key="frame" x="0.0" y="110" width="414" height="786"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="vzz-VI-2rT">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vzz-VI-2rT" id="whz-2h-9w7">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -33,30 +39,28 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="fn8-wy-arU" id="514-9I-0uf"/>
-                                    <outlet property="delegate" destination="fn8-wy-arU" id="j9S-j3-QDX"/>
+                                    <outlet property="dataSource" destination="fn8-wy-arU" id="fwu-ms-dvb"/>
+                                    <outlet property="delegate" destination="fn8-wy-arU" id="UMA-yT-zfD"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RG7-sb-Vfc">
-                                <rect key="frame" x="0.0" y="112" width="414" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" red="0.5941045880317688" green="0.72655302286148071" blue="0.91640114784240723" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="fn8-wy-arU" id="bmP-vY-Wa1"/>
-                                </connections>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="4cs-cA-rZB" firstAttribute="top" secondItem="HGg-kp-Rce" secondAttribute="top" constant="112" id="1Bu-kO-9gv"/>
-                            <constraint firstItem="4cs-cA-rZB" firstAttribute="leading" secondItem="HGg-kp-Rce" secondAttribute="leading" id="ZNk-SQ-wSC"/>
-                            <constraint firstItem="4cs-cA-rZB" firstAttribute="trailing" secondItem="HGg-kp-Rce" secondAttribute="trailing" id="hba-Qo-mEF"/>
-                            <constraint firstAttribute="bottom" secondItem="4cs-cA-rZB" secondAttribute="bottom" constant="-19" id="xIc-mO-rg8"/>
+                            <constraint firstAttribute="trailing" secondItem="RG7-sb-Vfc" secondAttribute="trailing" constant="20" id="7Ja-dc-MUD"/>
+                            <constraint firstItem="RG7-sb-Vfc" firstAttribute="top" secondItem="HGg-kp-Rce" secondAttribute="top" id="C9z-sN-Hqx"/>
+                            <constraint firstAttribute="bottom" secondItem="4cs-cA-rZB" secondAttribute="bottom" id="LiI-hn-q9J"/>
+                            <constraint firstItem="RG7-sb-Vfc" firstAttribute="leading" secondItem="HGg-kp-Rce" secondAttribute="leading" constant="20" id="PUM-mp-H9K"/>
+                            <constraint firstItem="4cs-cA-rZB" firstAttribute="top" secondItem="RG7-sb-Vfc" secondAttribute="bottom" constant="10" id="Uwk-98-iDX"/>
+                            <constraint firstItem="4cs-cA-rZB" firstAttribute="leading" secondItem="HGg-kp-Rce" secondAttribute="leading" id="csh-Ix-gJO"/>
+                            <constraint firstItem="4cs-cA-rZB" firstAttribute="trailing" secondItem="HGg-kp-Rce" secondAttribute="trailing" id="n45-Lb-c9X"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="HGg-kp-Rce"/>
                     </view>
                     <navigationItem key="navigationItem" id="BWS-Rt-j7B"/>
+                    <connections>
+                        <outlet property="myTableMedican" destination="4cs-cA-rZB" id="vRm-2D-kxs"/>
+                        <outlet property="searchBar" destination="RG7-sb-Vfc" id="tHc-CM-z4U"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NIZ-RE-eCP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

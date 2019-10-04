@@ -9,75 +9,72 @@
 import UIKit
 import FirebaseDatabase
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
- 
+class ViewController: UIViewController {
+  @IBOutlet weak var searchBar: UISearchBar!
+  @IBOutlet weak var myTableMedican: UITableView!
 
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var textField: UITextField!
-   
-    
-   // searchBar
-    private func setUpSearchBar() {
-       searchBar.delegate = self
-    
-    }
-    @IBOutlet weak var myTableMedican: UITableView!
-    
-    var diccionary:[String] = []
-    var searching = false
-    var handle: DatabaseHandle?
-    var ref: DatabaseReference!
- 
-    
-    
-    
- //Setting up our table view
-// extension ViewController: UITableViewDataSource, UITableViewDelegate {
-        
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searching {
-          return diccionary.count
-        } else {
-        return diccionary.count
-        }
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-    let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
-        if searching {
-            cell .textLabel?.text = diccionary[indexPath.row]
-        } else {
-       
-            cell.textLabel?.text = diccionary[indexPath.row]
-        }
-       
-    
-       return cell
-    }
-    
-        override func viewDidLoad(){
-       super.viewDidLoad()
-        
+  var diccionary:[String] = []
+  var diccionaryFilter:[String] = []
+  var searching = false
+  var handle: DatabaseHandle?
+  var ref: DatabaseReference!
 
 
-    
-        // Do any additional setup after loading the view.
-         ref = Database.database().reference()
- handle = ref?.child("diccionary").observe(.childAdded, with:{ (snapshot)in
-            if let item = snapshot.value as? String
-            {
-                self.diccionary.append(item)
-                self.myTableMedican.reloadData()
-               //mainSearchBar.delegate = self
-        }
-    })
- }
+  override func viewDidLoad(){
+    super.viewDidLoad()
+    // Do any additional setup after loading the view.
+    fetchDictionary()
+  }
 
-           override func didReceiveMemoryWarning(){
-            super.didReceiveMemoryWarning()
-
-      }
+  override func didReceiveMemoryWarning(){
+    super.didReceiveMemoryWarning()
   }
 
 
+  func fetchDictionary() {
+    ref = Database.database().reference()
+    handle = ref?.child("diccionary").observe(.childAdded, with:{ (snapshot)in
+      if let item = snapshot.value as? String
+      {
+        self.diccionary.append(item)
+        self.myTableMedican.reloadData()
+      }
+    })
+  }
+}
+
+
+extension ViewController: UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+  func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    if searchText == ""  {
+      searching = false
+      myTableMedican.reloadData()
+    } else {
+      searching = true
+      diccionaryFilter = diccionary.filter { $0.contains(searchText) }
+      if diccionaryFilter.isEmpty {
+        myTableMedican.reloadData()
+      } else {
+        myTableMedican.reloadData()
+      }
+    }
+  }
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if searching == false {
+      return diccionary.count
+    } else {
+      return diccionaryFilter.count
+    }
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+    if searching == false {
+      cell .textLabel?.text = diccionary[indexPath.row]
+    } else {
+      cell.textLabel?.text = diccionaryFilter[indexPath.row]
+    }
+    return cell
+  }
+}
